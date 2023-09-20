@@ -58,6 +58,7 @@ export default function App() {
   }, [pokeData]);
   console.log(pokeDisplay);
   function handleClick({ currentTarget }) {
+    currentTarget.disabled = true;
     console.log(currentTarget.id);
     if (clicked.includes(currentTarget.id)) {
       setGameOver(true);
