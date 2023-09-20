@@ -9,7 +9,7 @@ const updateDisplay = (data) => {
     let display = [];
     let count = 0;
     while (count < 5) {
-      const randIndex = Math.floor(Math.random() * 386);
+      const randIndex = Math.floor(Math.random() * 251);
       if (!indeces.includes(randIndex)) {
         indeces.push(randIndex);
         display.push(data[randIndex]);
@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => {
     (async function fetchPokemon() {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=386&offset=0",
+        "https://pokeapi.co/api/v2/pokemon?limit=251&offset=0",
         { mode: "cors" }
       );
       const pokeDataRaw = await response.json();
@@ -69,7 +69,7 @@ export default function App() {
     }
     setScore(score + 1);
     clicked.push(currentTarget.id);
-    if (clicked.length === 386) {
+    if (clicked.length === 251) {
       setGameOver(true);
       setScore(score + 1);
       return;
