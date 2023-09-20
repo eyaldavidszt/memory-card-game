@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, Fragment } from "react";
 import "../styles/app.css";
-const clicked = [];
+let clicked = [];
 let count = 0;
 const updateDisplay = (data) => {
   while (count < 1) {
@@ -9,7 +9,7 @@ const updateDisplay = (data) => {
     let display = [];
     let count = 0;
     while (count < 5) {
-      const randIndex = Math.floor(Math.random() * 1021);
+      const randIndex = Math.floor(Math.random() * 721);
       if (!indeces.includes(randIndex)) {
         indeces.push(randIndex);
         display.push(data[randIndex]);
@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => {
     (async function fetchPokemon() {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=1021&offset=0",
+        "https://pokeapi.co/api/v2/pokemon?limit=721&offset=0",
         { mode: "cors" }
       );
       const pokeDataRaw = await response.json();
@@ -59,10 +59,18 @@ export default function App() {
   console.log(pokeDisplay);
   function handleClick({ currentTarget }) {
     console.log(currentTarget.id);
-    if (clicked.includes(currentTarget.id)) setGameOver(true);
-    clicked.push(currentTarget.id);
-    if (clicked.length === 1021) {
+    if (clicked.includes(currentTarget.id)) {
       setGameOver(true);
+      if (score > highScore) {
+        setHighScore(score);
+      }
+      return;
+    }
+    setScore(score + 1);
+    clicked.push(currentTarget.id);
+    if (clicked.length === 721) {
+      setGameOver(true);
+      setScore(score + 1);
       return;
     }
     (async function () {
@@ -71,11 +79,21 @@ export default function App() {
       setPokeDisplay(myArr);
     })();
   }
+  function handleReset() {
+    clicked = [];
+    setScore(0);
+    setGameOver(false);
+    if (pokeData.length === 0) return;
+    const myArr = expandPoke(updateDisplay(pokeData)).then(
+      setPokeDisplay(myArr)
+    );
+  }
   if (gameOver)
     return (
       <>
-        <div>Game Over!</div>
-        <button>Play Again</button>
+        <div>Game Over! score: {score}</div>
+        <div>high score: {highScore}</div>
+        <button onClick={handleReset}>Play Again</button>
       </>
     );
 
