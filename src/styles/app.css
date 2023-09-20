@@ -15,7 +15,7 @@ button {
   border-radius: 5px;
   background-color: #fffde7;
   > h2 {
-    font-size: 3vw;
+    font-size: clamp(0px, 3vw, 24px);
   }
 }
 

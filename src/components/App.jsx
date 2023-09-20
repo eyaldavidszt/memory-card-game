@@ -108,7 +108,7 @@ export default function App() {
 
   return (
     <>
-      <h3 style={{ fontSize: "4vw" }}>score: {score}</h3>
+      <h3 style={{ fontSize: "clamp(16px, 4vw, 24px)" }}>score: {score}</h3>
       <div className="card-wrapper">
         {pokeDisplay.map((poke) => (
           <button key={poke.name} onClick={handleClick} id={poke.name}>
