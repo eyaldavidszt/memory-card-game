@@ -107,13 +107,16 @@ export default function App() {
     );
 
   return (
-    <div className="card-wrapper">
-      {pokeDisplay.map((poke) => (
-        <button key={poke.name} onClick={handleClick} id={poke.name}>
-          <h2>{poke.name}</h2>
-          <img src={poke.sprites.front_default} alt="" />
-        </button>
-      ))}
-    </div>
+    <>
+      <h3>score: {score}</h3>
+      <div className="card-wrapper">
+        {pokeDisplay.map((poke) => (
+          <button key={poke.name} onClick={handleClick} id={poke.name}>
+            <h2>{poke.name}</h2>
+            <img src={poke.sprites.front_default} alt="" />
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
