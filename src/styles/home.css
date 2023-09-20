@@ -4,6 +4,15 @@
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
+  > h1 {
+    font-size: 5vw;
+    padding: 1rem;
+  }
+  > h2 {
+    font-size: 4vw;
+    text-align: center;
+    padding: 1rem;
+  }
 }
 
 button {

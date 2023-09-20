@@ -14,6 +14,9 @@ button {
   min-width: 150px;
   border-radius: 5px;
   background-color: #fffde7;
+  > h2 {
+    font-size: 3vw;
+  }
 }
 
 .card-wrapper {
@@ -29,5 +32,14 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .card-wrapper {
+    padding: 0rem;
+  }
+  .card-wrapper img {
+    width: 64px;
   }
 }
