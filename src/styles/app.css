@@ -1,9 +1,21 @@
+@font-face {
+  font-family: a gobblin appears;
+  src: url(../assets/agoblinappears.ttf);
+}
+* {
+  font-family: "a gobblin appears";
+}
+h2 {
+  font-size: smaller;
+}
 button {
   all: initial;
   border: 1px solid black;
   padding: 0.5rem 1rem;
   margin: 0.1rem;
   min-width: 150px;
+  border-radius: 5px;
+  background-color: #fffde7;
 }
 
 .card-wrapper {

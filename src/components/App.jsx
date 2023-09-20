@@ -35,6 +35,8 @@ export default function App() {
   const [pokeDisplay, setPokeDisplay] = useState([]);
   const [pokeData, setPokeData] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [highScore, setHighScore] = useState(0);
+  const [score, setScore] = useState(0);
   useEffect(() => {
     (async function fetchPokemon() {
       const response = await fetch(
