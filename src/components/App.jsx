@@ -9,7 +9,7 @@ const updateDisplay = (data) => {
     let display = [];
     let count = 0;
     while (count < 5) {
-      const randIndex = Math.floor(Math.random() * 5);
+      const randIndex = Math.floor(Math.random() * 1021);
       if (!indeces.includes(randIndex)) {
         indeces.push(randIndex);
         display.push(data[randIndex]);
@@ -38,12 +38,12 @@ export default function App() {
   useEffect(() => {
     (async function fetchPokemon() {
       const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0",
+        "https://pokeapi.co/api/v2/pokemon?limit=1021&offset=0",
         { mode: "cors" }
       );
       const pokeDataRaw = await response.json();
-      let pokeData = pokeDataRaw.results;
-      setPokeData(pokeData);
+      let pokeDataNew = pokeDataRaw.results;
+      setPokeData(pokeDataNew);
     })();
   }, []);
 
@@ -59,13 +59,23 @@ export default function App() {
     console.log(currentTarget.id);
     if (clicked.includes(currentTarget.id)) setGameOver(true);
     clicked.push(currentTarget.id);
+    if (clicked.length === 1021) {
+      setGameOver(true);
+      return;
+    }
     (async function () {
       if (pokeData.length === 0) return;
       const myArr = await expandPoke(updateDisplay(pokeData));
       setPokeDisplay(myArr);
     })();
   }
-  if (gameOver) return <div>bye</div>;
+  if (gameOver)
+    return (
+      <>
+        <div>Game Over!</div>
+        <button>Play Again</button>
+      </>
+    );
 
   return (
     <div className="card-wrapper">
