@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 const seen = [];
+let count = 0;
 const updateDisplay = (data) => {
-  //make array until it's a good one and then return it.
-  // a good array is one that has AT LEAST 1 novel card and 5 different pokemon
-  //first, pick 5 different pokemon. write the code:
-  for (;;) {
+  while (count < 1) {
     const indeces = [];
-    const display = [];
+    let display = [];
     let count = 0;
     while (count < 5) {
       const randIndex = Math.floor(Math.random() * 1021);
@@ -17,10 +15,21 @@ const updateDisplay = (data) => {
         count += 1;
       }
     }
-    if (display.some((item) => !seen.includes(item))) return display;
+    if (display.some((item) => !seen.includes(item))) {
+      return display;
+    }
   }
 };
-async function expandPoke(array) {}
+
+async function expandPoke(array) {
+  const newArr = [];
+  for (let poke of array) {
+    const response = await fetch(`${poke.url}`, { mode: "cors" });
+    const pokeDataRaw = await response.json();
+    newArr.push(pokeDataRaw);
+  }
+  return newArr;
+}
 export default function App() {
   const [pokeDisplay, setPokeDisplay] = useState([]);
   const [pokeData, setPokeData] = useState([]);
@@ -32,21 +41,26 @@ export default function App() {
         { mode: "cors" }
       );
       const pokeDataRaw = await response.json();
-      const pokeData = pokeDataRaw.results;
-
+      let pokeData = pokeDataRaw.results;
       setPokeData(pokeData);
     })();
   }, []);
 
   useEffect(() => {
-    if (pokeData.length === 0) return;
-    setPokeDisplay(updateDisplay(pokeData));
+    (async function doSomething() {
+      if (pokeData.length === 0) return;
+      const myArr = await expandPoke(updateDisplay(pokeData));
+      setPokeDisplay(myArr);
+    })();
   }, [pokeData]);
-
+  console.log(pokeData);
   return (
     <>
       {pokeDisplay.map((poke) => (
-        <h1 key={poke.name}>{poke.name}</h1>
+        <button key={poke.name}>
+          <h2>{poke.name}</h2>
+          <img src={poke.sprites.front_default} alt="" />
+        </button>
       ))}
     </>
   );
