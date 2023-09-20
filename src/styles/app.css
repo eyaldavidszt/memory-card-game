@@ -4,9 +4,7 @@
 }
 * {
   font-family: "a gobblin appears";
-}
-h2 {
-  font-size: smaller;
+  letter-spacing: 0.1ch;
 }
 button {
   all: initial;
@@ -19,6 +17,10 @@ button {
 }
 
 .card-wrapper {
+  > h2 {
+    font-size: smaller;
+  }
+  padding: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

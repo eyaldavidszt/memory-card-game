@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <>
       <header className="content">
-        <h1>Memory Game!</h1>
+        <h1>Pokémemory!</h1>
         <h2>dont click the same pokémon twice!</h2>
+        <button onClick={handleStart}>START</button>
       </header>
-      <button onClick={handleStart}>Start</button>
     </>
   );
 }
